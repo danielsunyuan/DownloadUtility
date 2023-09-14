@@ -1,8 +1,11 @@
 import subprocess
 import os
 
-# Specify the path to your audio directory
-audio_directory = "AudioSplitter/audio"
+# Get the current script's directory
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Specify the path to your audio directory within the parent directory
+audio_directory = os.path.join(script_dir, "audio")
 
 # Create a directory for downloading audio stems
 download_dir = "audio_stems"
