@@ -15,7 +15,7 @@ bash_script_path = "commands.sh"
 with open(bash_script_path, "w") as bash_script:
     # Write the Conda activation command to the script
     bash_script.write("#!/bin/bash\n")
-    bash_script.write("source activate util_video\n")
+    bash_script.write("source activate utility\n")
 
     # Write each video link to the script and specify the download directory
     for link in links:
