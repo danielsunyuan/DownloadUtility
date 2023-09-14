@@ -7,6 +7,8 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 # Specify the path to your audio directory within the parent directory
 audio_directory = os.path.join(script_dir, "audio")
 
+print(audio_directory)
+
 # Create a directory for downloading audio stems
 download_dir = "audio_stems"
 
@@ -32,8 +34,6 @@ with open(bash_script_path, "w") as bash_script:
             download_command = f"spleeter separate -p spleeter:2stems -o {download_dir} '{audio_path}'\n"
             bash_script.write(download_command)
 
-# Make the Bash script executable
+# Make and Run the Bash script executable
 subprocess.run(["chmod", "+x", bash_script_path])
-
-# Run the Bash script to separate audio
 subprocess.run(["./" + bash_script_path])

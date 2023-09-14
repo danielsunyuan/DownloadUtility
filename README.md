@@ -1,2 +1,2 @@
 # download_utilities
-Tools for downloading content off the internet
+Tools for downloading and manipulating content off the internet. 

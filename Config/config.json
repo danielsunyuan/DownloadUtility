@@ -1,4 +1,4 @@
 {
-    "conda_env_main": "utility",
+    "conda_env_utility": "utility",
     "conda_env_splitter": "spleeter"
 }
