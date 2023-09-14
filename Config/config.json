@@ -1,3 +1,4 @@
 {
-    "conda_environment": "util_video"
+    "conda_env_main": "utility",
+    "conda_env_splitter": "spleeter"
 }
