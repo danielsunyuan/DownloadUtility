@@ -1,4 +1,4 @@
-AudioSplitter/audio_stems/pretrained_models/**
-AudioSplitter/audio_stems
-AudioSplitter/audio
+Splitter/pretrained_models
+Splitter/audio_stems/**
+Splitter/audio/**
 Stems/**
