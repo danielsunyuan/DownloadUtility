@@ -1,5 +1,5 @@
 import os
-from AudioUtility.audioDL import LinkToAudioDownloader
+from AudioUtility.downloadAudio import LinkToAudioDownloader
 from Splitter.split import AudioStemExtractor
 
 def main():
@@ -14,13 +14,13 @@ def main():
     audio_downloader.download_audio()
 
     # Define the audio directories
-    audio_downloader_dir = audio_downloader.download_dir
     audio_splitter_dir = "Splitter/audio_stems"
+    output_dir = f"{os.path.dirname(os.path.abspath(__file__))}/Output"
 
     # Create an instance of the AudioStemExtractor class
     audio_splitter = AudioStemExtractor(
         audio_directory="audio",
-        download_dir="Stems",
+        download_dir=output_dir,
         bash_script_path="Splitter/commands.sh"
     )
     # Call the extract_stems method to extract audio stems

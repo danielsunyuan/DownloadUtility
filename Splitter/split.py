@@ -15,6 +15,7 @@ class AudioStemExtractor:
         # Open & Write the Bash script
         with open(self.bash_script_path, "w") as bash_script:
             bash_script.write("#!/bin/bash\n")
+            bash_script.write(f"cd {script_dir}\n")
             bash_script.write("source activate spleeter\n")
 
             # Ensure the output directory exists
