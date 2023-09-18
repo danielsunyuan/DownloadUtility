@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 class LinkToAudioDownloader:
     def __init__(self, links_file, download_dir, bash_script_path):
@@ -14,7 +15,6 @@ class LinkToAudioDownloader:
 
         # Open the Bash script for writing
         with open(self.bash_script_path, "w") as bash_script:
-            # Write the Conda activation command to the script
             bash_script.write("#!/bin/bash\n")
             bash_script.write("source activate utility\n")
 
@@ -26,6 +26,10 @@ class LinkToAudioDownloader:
         # Make and Run the Bash script executable
         subprocess.run(["chmod", "+x", self.bash_script_path])
         subprocess.run(["./" + self.bash_script_path])
+        
+        # Clear the bash script
+        with open(self.bash_script_path, "w"):
+            pass
 
 if __name__ == "__main__":
 
