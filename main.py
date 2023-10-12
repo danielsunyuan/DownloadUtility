@@ -1,15 +1,51 @@
 import os
+import argparse
 from AudioUtility.downloadAudio import LinkToAudioDownloader
 from Splitter.split import AudioStemExtractor
 
 def main():
 
-    #output_dir = f"{os.path.dirname(os.path.abspath(__file__))}/output"
+    # Arguments
+    parser = argparse.ArgumentParser(description="Download and process audio from a link.")
+    parser.add_argument("link", \
+                        help="link to download audio from")
+    
+    parser.add_argument("-v", "--video", \
+                        description="Download link to Video", \
+                        help="Required: Valid Link to Video", \
+                        type=str)
+
+    parser.add_argument("-a", "--audio", \
+                        description="Donwnload link to Audio", \
+                        help="Required: Valid Link to Video", \
+                        type=str)
+    
+    parser.add_argument("-s", "--stems", \
+                        description="Extract stems from link", \
+                        help="Required: Valid Link to Video", \
+                        type=str)
+
+    parser.add_argument("-acca", "--accapella", \
+                        description="Extract accapella from link", \
+                        help="Required: Valid Link to Video", \
+                        type=str)
+
+    parser.add_argument("-intr", "--instrumental", \
+                        description="Extract instrumental from link", \
+                        help="Required: Valid Link to Video", \
+                        type=str)
+
+
+    args = parser.parse_args()
+    links = args.link
+
+    # Output directory
     user_home = os.path.expanduser("~")
     output_dir = os.path.join(user_home, "Downloads")
 
+    # Download audio from the provided YouTube link
     audio_downloader = LinkToAudioDownloader(
-        links_file="links.txt",
+        link=links,
         download_dir="Splitter/audio",
         bash_script_path="AudioUtility/commands.sh"
     )
