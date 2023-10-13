@@ -2,10 +2,11 @@ import subprocess
 import os
 
 class AudioStemExtractor:
-    def __init__(self, audio_directory, download_dir, bash_script_path):
+    def __init__(self, audio_directory, download_dir, bash_script_path, stem_number):
         self.audio_directory = audio_directory
         self.download_dir = download_dir
         self.bash_script_path = bash_script_path
+        self.stem_number = stem_number
 
     def extract_stems(self):
         script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -23,7 +24,7 @@ class AudioStemExtractor:
                 if audio_file.endswith(".mp3") or audio_file.endswith(".wav"):
                     audio_path = os.path.join(audio_directory, audio_file)
 
-                    download_command = f"spleeter separate -p spleeter:2stems-16kHz -o {self.download_dir} '{audio_path}'\n"
+                    download_command = f"spleeter separate -p spleeter:{self.stem_number}stems-16kHz -o {self.download_dir} '{audio_path}'\n"
                     bash_script.write(download_command)
 
         # Make and run the Bash script executable
@@ -42,6 +43,7 @@ class AudioStemExtractor:
             audio_path = os.path.join(audio_directory, audio_file)
             if os.path.isfile(audio_path):
                 os.remove(audio_path)
+
 
 if __name__ == "__main__":
 
