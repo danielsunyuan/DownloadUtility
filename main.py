@@ -1,4 +1,5 @@
 import os
+import shutil
 import argparse
 from AudioUtility.downloadAudio import LinkToAudioDownloader
 from Splitter.split import AudioStemExtractor
@@ -15,31 +16,31 @@ def main():
     parser.add_argument("-v", "--video",
                         action="store_true",
                         dest="video",
-                        help="Required: Valid Link to Video",
+                        help="Download Video",
                         )
 
     parser.add_argument("-a", "--audio",
                         action="store_true",
                         dest="audio",
-                        help="Required: Valid Link to Video",
+                        help="Download Audio",
                         )
     
     parser.add_argument("-s", "--stems",
                         action="store_true",
                         dest="stems",
-                        help="Required: Valid Link to Video",
+                        help="Extract Stems from Link",
                         )
 
     parser.add_argument("-acca", "--accapella",
                         action="store_true",
                         dest="accapella",
-                        help="Required: Valid Link to Video",
+                        help="Extract Accapella from Link",
                         )
 
     parser.add_argument("-inst", "--instrumental",
                         action="store_true",
                         dest="instrumental",
-                        help="Required: Valid Link to Video",
+                        help="Extract Instrumental from Link",
                         )
 
     parser.add_argument("-o", "--output-dir",
@@ -61,6 +62,7 @@ def main():
     links = options.link.split(",")  # Split multiple links by a comma
     links = options.link
 
+
     if options.audio:
         audio_downloader(links, output_dir)
 
@@ -68,10 +70,15 @@ def main():
         video_downloader(links, output_dir)
 
     if options.stems:
-        four_stem_download(links, output_dir)
+        stem_download(links, output_dir, stem_num=4)
 
     if options.accapella:
-        two_stem_download(links, output_dir)
+        stem_download(links, output_dir, stem_num=2)
+        raise NotImplementedError
+
+    if options.instrumental:
+        stem_download(links, output_dir, stem_num=2)
+        raise NotImplementedError
 
     print(f"Files ready ---> {output_dir}")
 
@@ -81,7 +88,7 @@ def audio_downloader(links, output_dir):
     audio_downloader = LinkToAudioDownloader(
         link=links,
         download_dir=output_dir,
-        bash_script_path="AudioUtility/commands.sh"
+        bash_script_path="commands.sh"
     )
 
     audio_downloader.download_audio()
@@ -98,7 +105,7 @@ def video_downloader(links, output_dir):
 
     return
 
-def four_stem_download(links, output_dir):
+def stem_download(links, output_dir, stem_num):
     # Download audio from the provided link
 
     audio_downloader = LinkToAudioDownloader(
@@ -108,29 +115,9 @@ def four_stem_download(links, output_dir):
     )
     splitter = AudioStemExtractor(
         audio_directory="__audio__",
-        download_dir=output_dir,
+        download_dir="__processing__",
         bash_script_path="Splitter/commands.sh",
-        stem_number="4"
-    )
-
-    splitter.clear_download_directory()
-    audio_downloader.download_audio()
-    splitter.extract_stems()
-
-    return
-
-def two_stem_download(links, output_dir):
-
-    audio_downloader = LinkToAudioDownloader(
-        link=links,
-        download_dir="Splitter/__audio__",
-        bash_script_path="AudioUtility/commands.sh"
-    )
-    splitter = AudioStemExtractor(
-        audio_directory="__audio__",
-        download_dir=output_dir,
-        bash_script_path="Splitter/commands.sh",
-        stem_number="2"
+        stem_number=str(stem_num)
     )
 
     splitter.clear_download_directory()

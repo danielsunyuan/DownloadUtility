@@ -16,7 +16,6 @@ class LinkToAudioDownloader:
         with open(self.links_file, "r") as file:
             self.links = file.read().splitlines()
 
-
     def bash_shell(self):
         # Open the Bash script for writing
         with open(self.bash_script_path, "w") as bash_script:

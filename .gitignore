@@ -3,3 +3,4 @@ Splitter/audio_stems/**
 Splitter/__audio__/**
 AudioUtility/downloaded_audio/**
 VideoUtility/downloaded_videos/**
+__processing__/**

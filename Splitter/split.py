@@ -36,6 +36,7 @@ class AudioStemExtractor:
             pass
 
     def clear_download_directory(self):
+        # Clear the Splitter/__audio__/ directory
         script_dir = os.path.dirname(os.path.abspath(__file__))
         audio_directory = os.path.join(script_dir, self.audio_directory)
         
@@ -48,7 +49,7 @@ class AudioStemExtractor:
 if __name__ == "__main__":
 
     splitter = AudioStemExtractor(
-        audio_directory="audio",
+        audio_directory="__audio__",
         download_dir="output",
         bash_script_path="commands.sh"
     )
