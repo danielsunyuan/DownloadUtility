@@ -1,5 +1,6 @@
 Splitter/pretrained_models/**
 Splitter/audio_stems/**
-Splitter/audio/**
+Splitter/__audio__/**
+AudioUtility/downloaded_audio/**
+VideoUtility/downloaded_videos/**
 Stems/**
-output/**
